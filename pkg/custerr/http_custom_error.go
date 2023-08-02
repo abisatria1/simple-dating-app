@@ -7,7 +7,6 @@ import (
 )
 
 var (
-	ErrInvalidPayload   = echo.NewHTTPError(http.StatusUnprocessableEntity, "invalid request payload")
-	ErrRecordNotFound   = echo.NewHTTPError(http.StatusBadRequest, "record not found")
-	ErrEmailAlreadyUsed = echo.NewHTTPError(http.StatusBadRequest, "email already used")
+	ErrInvalidPayload = echo.NewHTTPError(http.StatusUnprocessableEntity, "invalid request payload")
+	ErrRecordNotFound = echo.NewHTTPError(http.StatusBadRequest, "record not found")
 )
