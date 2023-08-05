@@ -2,6 +2,8 @@
 APP_NAME = simple-bumble
 MAIN_FILE = cmd/api/application.go
 MIGRATION_FILE = cmd/migration/migration.go
+SEEDER_FILE = cmd/seed/seed.go
+
 
 .DEFAULT_GOAL := run
 
@@ -15,11 +17,17 @@ build:
 
 # Run the application using 'air'
 run:
-	air
+	go run ${MAIN_FILE}
+
+dev: 
+	air 
 
 # Run migration 
 migration: 
 	go run ${MIGRATION_FILE}
+
+seed: 
+	go run ${SEEDER_FILE}
 
 # Clean up the build artifacts
 clean:

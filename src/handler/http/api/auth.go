@@ -29,25 +29,3 @@ func (a *API) Login(c echo.Context) (response httpservice.HandlerResponse, err e
 
 	return httpservice.NewJsonResponse().SetData(jwtToken), nil
 }
-
-func (a *API) RegisterUser(c echo.Context) (response httpservice.HandlerResponse, err error) {
-	payload := model.RegisterUserRequest{}
-	response = httpservice.NewJsonResponse()
-
-	if err = c.Bind(&payload); err != nil {
-		err = custerr.ErrInvalidPayload.SetInternal(errors.Wrapf(err, "error bind: %s", err.Error()))
-		return
-	}
-
-	if err = payload.Validate(); err != nil {
-		err = custerr.ErrInvalidPayload.SetInternal(errors.Wrapf(err, "validation err: %s", err.Error()))
-		return
-	}
-
-	userId, err := a.service.Usecases.Auth.RegisterUser(c.Request().Context(), payload)
-	if err != nil {
-		return
-	}
-
-	return httpservice.NewJsonResponse().SetData(map[string]interface{}{"id": userId}), nil
-}

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -40,6 +41,12 @@ func New(o *Options) EchoHttpServer {
 
 func (h *httpServer) Run() {
 	h.echo.Use(middleware.Logger())
+	h.echo.Use(middleware.Recover())
+	h.echo.Use(middleware.Secure())
+	h.echo.Use(middleware.CORS())
+	h.echo.Use(middleware.TimeoutWithConfig(middleware.TimeoutConfig{
+		Timeout: time.Duration(h.readTimeout) * time.Millisecond,
+	}))
 
 	fmt.Printf("starting application on %d", h.listenAddress)
 	// h.echo.HTTPErrorHandler = handleEchoError()

@@ -5,7 +5,7 @@ import (
 
 	"github.com/abisatria1/simple-dating-app/pkg/gorm"
 	"github.com/abisatria1/simple-dating-app/src/config"
-	"github.com/abisatria1/simple-dating-app/src/domain/migration"
+	"github.com/abisatria1/simple-dating-app/src/domain/seed"
 )
 
 func main() {
@@ -13,12 +13,12 @@ func main() {
 	config.Init(cfg)
 
 	db := gorm.New(cfg.DB)
-	migrationManager := migration.NewGormMigration(&migration.Options{
+	migrationManager := seed.NewGormSeeder(&seed.Options{
 		DB: db,
 	})
-	err := migrationManager.DoMigration()
+	err := migrationManager.DoSeeding()
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println("successfuly do migration")
+	log.Println("successfuly do seeding")
 }

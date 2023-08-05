@@ -1,7 +1,7 @@
 package migration
 
 import (
-	"github.com/abisatria1/simple-dating-app/src/model"
+	"github.com/abisatria1/simple-dating-app/src/domain/entity"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )
@@ -26,7 +26,13 @@ func NewGormMigration(o *Options) MigrationManager {
 
 func (gm *GormMigrator) DoMigration() (err error) {
 	err = gm.DB.AutoMigrate(
-		&model.User{},
+		&entity.User{},
+		&entity.UserInterest{},
+		&entity.Interest{},
+		&entity.UserBlacklist{},
+		&entity.UserMatch{},
+		&entity.UserLike{},
+		&entity.Subscription{},
 	)
 	if err != nil {
 		return errors.Wrapf(err, "migrating error : %s", err.Error())
