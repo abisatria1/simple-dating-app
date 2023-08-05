@@ -29,3 +29,7 @@ This folder is used to store all module initation in the application.
 * `middleware` This folder is to used to store all middleware function in application. 
 * `constant` This folder used to store all constant in application
 * `config` This folder used to store all configuration in application
+
+
+#### How to run unit test 
+Simply run command `make test` to run unit test in this application 
